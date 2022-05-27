@@ -3,7 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['joeschmoe.io'],
+    domains: ['nextjs-app-ts-template.vercel.app', 'joeschmoe.io'],
   },
 };
 
