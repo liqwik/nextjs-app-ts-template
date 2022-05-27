@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import ProductCard, { IProductCard } from './ProductCard';
-import { mockProductCardProps } from './ProductCard.mock';
+import { mockProductCardProps } from './ProductCard.mocks';
 
 export default {
   title: 'cards/ProductCard',
