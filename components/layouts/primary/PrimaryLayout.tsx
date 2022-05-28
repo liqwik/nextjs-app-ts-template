@@ -1,19 +1,22 @@
 import Head from 'next/head';
-import styles from './PrimaryLayout.module.css';
+import Footer from '../../nav/footer/Footer';
+import Header from '../../nav/header/Header';
 
-export interface IPrimaryLayout {
-  children: any;
-}
+export interface IPrimaryLayout {}
 
-const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }) => {
+const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }: any) => {
   return (
     <>
       <Head>
-        <title>Primary Layout Example</title>
+        <title>NextJs Fullstack App Template</title>
       </Head>
-      <main className={styles.main}>{children}</main>
+      <div className="min-h-screen flex flex-col items-center">
+        <Header />
+        <main>{children}</main>
+        <div className="m-auto" />
+        <Footer />
+      </div>
     </>
   );
 };
-
 export default PrimaryLayout;
