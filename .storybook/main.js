@@ -7,16 +7,23 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
+    'storybook-css-modules-preset',
     {
-      name: 'storybook-addon-next',
+      /**
+       * Fix Storybook issue with PostCSS@8
+       * @see https://github.com/storybookjs/storybook/issues/12668#issuecomment-773958085
+       */
+      name: '@storybook/addon-postcss',
       options: {
-        nextConfigPath: path.resolve(__dirname, '../next.config.js'),
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
       },
     },
   ],
   framework: '@storybook/react',
   core: {
-    builder: 'webpack5',
+    builder: '@storybook/builder-webpack5',
   },
   typescript: {
     reactDocgen: false,
