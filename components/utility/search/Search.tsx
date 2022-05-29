@@ -1,13 +1,15 @@
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export interface ISearch {}
 
 const Search: React.FC<ISearch> = () => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>();
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    alert(`type: ${searchTerm}`);
+    router.push(`/results?search=${searchTerm}`);
   };
 
   const handleInputChange = (e: any) => {
@@ -29,7 +31,10 @@ const Search: React.FC<ISearch> = () => {
         <button type="submit" className="btn-primary">
           Google Search
         </button>
-        <button type="submit" className="btn-primary">
+        <button
+          className="btn-primary"
+          onClick={() => alert('FEATURE COMING SOON!')}
+        >
           I&apos;m Feeling Lucky
         </button>
       </div>
