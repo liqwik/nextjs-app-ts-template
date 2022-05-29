@@ -1,10 +1,7 @@
+import { ISearchData } from 'lib/search/types';
 import Link from 'next/link';
 
-export interface ISearchResult extends React.ComponentPropsWithoutRef<'div'> {
-  url: string;
-  title: string;
-  text: string;
-}
+export type ISearchResult = ISearchData & React.ComponentPropsWithoutRef<'div'>;
 
 const SearchResult: React.FC<ISearchResult> = ({
   url,
