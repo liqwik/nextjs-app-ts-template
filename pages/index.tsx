@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { emoji, gridPerRow, maxCell, mazesGrid, name } from './constant';
+import {
+  emoji,
+  gridPerRow,
+  maxCell,
+  mazesGrid,
+  name,
+} from '../lib/utils/constant';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
