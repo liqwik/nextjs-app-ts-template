@@ -1,16 +1,13 @@
-import ProductCard from '../components/cards/product/ProductCard';
-import { mockProductCardProps } from '../components/cards/product/ProductCard.mocks';
+import SidebarLayout from '@/components/layouts/sidebar/SidebarLayout';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
-import SidebarLayout from '../components/layouts/sidebar/SidebarLayout';
 import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
   return (
-    <section className="bg-gradient-to-r from-cyan-500 to-blue-500">
-      <h1>
-        Welcome to <a href="https://nextjs.org">Next.js!</a>
+    <section className="bg-slate-900 w-screen h-screen">
+      <h1 className="text-4xl text-white font-medium tracking-wide">
+        Welcome to Maxipleng!
       </h1>
-      <ProductCard {...mockProductCardProps.base} />
     </section>
   );
 };
