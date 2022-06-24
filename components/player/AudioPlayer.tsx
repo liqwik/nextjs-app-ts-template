@@ -49,7 +49,7 @@ const AudioPlayer: React.FC<IAudioPlayer> = ({ title, src, bgImg }) => {
   };
 
   return sound ? (
-    <IconButton variant="transparent" size="large" onClick={handlePlay}>
+    <IconButton size="large" onClick={handlePlay}>
       <div className="flex flex-col items-center relative">
         {!isPlaying ? <IconPlay /> : <IconPause />}
         <p>{title}</p>
