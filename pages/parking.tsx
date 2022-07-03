@@ -1,3 +1,4 @@
+import ParkingCard from 'components/cards/parking-card/ParkingCard';
 import PrimaryLayout from 'components/layouts/primary/PrimaryLayout';
 import SidebarLayout from 'components/layouts/sidebar/SidebarLayout';
 import { useRouter } from 'next/router';
@@ -72,19 +73,14 @@ const Parking: NextPageWithLayout = () => {
         <div className="col-span-9 px-2 py-2">
           <div className="grid grid-cols-6 justify-between gap-2">
             {parkingBoard &&
-              parkingBoard.map((plg, idx) => {
-                const isParked = plg ? 'bg-red-400' : 'bg-green-400';
-
-                return (
-                  <button
-                    key={idx}
-                    className={`block p-4 rounded-md ${isParked}`}
-                    onClick={() => handleRemoveParking(plg)}
-                  >
-                    {plg ? plg : 'O'}
-                  </button>
-                );
-              })}
+              parkingBoard.map((plg, idx) => (
+                <ParkingCard
+                  key={idx}
+                  content={plg ? plg : 'O'}
+                  isParked={!!plg}
+                  onRemoveParking={() => handleRemoveParking(plg)}
+                />
+              ))}
           </div>
         </div>
       </div>
