@@ -1,6 +1,8 @@
 import PrimaryLayout from 'components/layouts/primary/PrimaryLayout';
 import SidebarLayout from 'components/layouts/sidebar/SidebarLayout';
+import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
+import { keyCodeToSymbol } from 'utils/constant';
 import {
   emoji,
   gridPerRow,
@@ -12,29 +14,37 @@ import { NextPageWithLayout } from './page';
 
 const Home: NextPageWithLayout = () => {
   const [selected, setSelected] = useState(0);
+  const [logs, setLogs] = useState<number[]>([]);
 
-  const downHandler = useCallback((e: any) => {
-    switch (e.keyCode) {
-      case 37:
-        setSelected((prev) => (prev <= 0 ? prev : prev - 1));
-        break;
+  const downHandler = useCallback(
+    (e: any) => {
+      switch (e.keyCode) {
+        case 37:
+          setSelected((prev) => (prev <= 0 ? prev : prev - 1));
+          break;
 
-      case 38:
-        setSelected((prev) => (prev - gridPerRow <= 0 ? prev : prev - 3));
-        break;
+        case 38:
+          setSelected((prev) => (prev - gridPerRow <= 0 ? prev : prev - 3));
+          break;
 
-      case 39:
-        setSelected((prev) => (prev >= maxCell - 1 ? prev : prev + 1));
-        break;
+        case 39:
+          setSelected((prev) => (prev >= maxCell - 1 ? prev : prev + 1));
+          break;
 
-      case 40:
-        setSelected((prev) => (prev + gridPerRow > 8 ? prev : prev + 3));
-        break;
+        case 40:
+          setSelected((prev) => (prev + gridPerRow > 8 ? prev : prev + 3));
+          break;
 
-      default:
-        break;
-    }
-  }, []);
+        default:
+          break;
+      }
+
+      if ([37, 38, 39, 40].includes(e.keyCode)) {
+        setLogs([...logs, e.keyCode]);
+      }
+    },
+    [logs]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler);
@@ -47,12 +57,25 @@ const Home: NextPageWithLayout = () => {
   return (
     <section className="h-screen w-screen">
       <div className="grid grid-cols-12 w-full h-full">
-        <div className="col-span-3 bg-slate-200">
-          <div className="py-2 px-2">
+        <div className="col-span-3 flex flex-col bg-slate-200 justify-between py-4 px-4">
+          <div className="">
             <p>Introduction</p>
             <p className="text-sm text-gray-600">
               Use arrow key Left, Up, Right, Down to Move
             </p>
+          </div>
+          <div>
+            <ul className="max-h-64 overflow-scroll scroll-m-6">
+              {logs &&
+                logs.map((log, idx) => (
+                  <li className="inline-block mr-1" key={`${log}_${idx}`}>
+                    {keyCodeToSymbol[log]}
+                  </li>
+                ))}
+            </ul>
+          </div>
+          <div className="text-right">
+            <p className="text-sm text-gray-500">Version 0.1</p>
           </div>
         </div>
 
@@ -83,9 +106,15 @@ export default Home;
 
 Home.getLayout = (page) => {
   return (
-    <PrimaryLayout>
-      <SidebarLayout />
-      {page}
-    </PrimaryLayout>
+    <>
+      <Head>
+        <title>Escape Game</title>
+        <meta property="og:title" content="Escape Game" key="title" />
+      </Head>
+      <PrimaryLayout>
+        <SidebarLayout />
+        {page}
+      </PrimaryLayout>
+    </>
   );
 };
